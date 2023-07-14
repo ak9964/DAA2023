@@ -1,0 +1,73 @@
+import java.util.Random;
+import java.util.Scanner;
+public class Mergesort {
+	public static int SIZE = 7000;
+	public static void main(String[]args) throws
+	ArrayIndexOutOfBoundsException
+	{
+		int a[] =new int[SIZE];
+		System.out.println("enter the totle number of elements for sorting");
+		Scanner sc =new Scanner(System.in);
+		int n=sc.nextInt();
+		Random m=new Random();
+		for(int i=0; i<n;i++)
+		{
+			a[i] =m.nextInt(10)+1;
+		}
+		System.out.println("\n the elements before sorting");
+		for(int i=0; i<n;i++){
+			System.out.println(" "+a[i]);
+		}
+		long Start_time,end_time;
+		Start_time=System.nanoTime();
+		merge_sort(a,0,n-1);
+		end_time=System.nanoTime();
+		System.out.println("\n the elements after sorting");
+		for(int i=0;i<n;i++){
+	System.out.println(" "+a[i]);
+		}
+		System.out.println("\n the time Required for sorting"+n+" number is:"+(end_time-Start_time)+"ns");
+	}	
+public static void merge_sort( int a[],int low,int high)
+	{
+	int mid;
+	if(low<high){
+		mid=(low+high)/2;
+		merge_sort(a,low,mid);
+		merge_sort(a,mid+1,high);
+		combine(a,low,mid,high);
+	}
+	}
+ public static void combine(int a[],int low,int mid,int high){
+	int i,j,k;
+	int[]temp;
+	temp=new int[7000];
+	k=low;
+	i=low;
+	j=mid+1;while(i<=mid&&j<=high){
+		if(a[i]<=a[j]){
+			temp[k]=a[i];
+			i++;
+			k++;
+		}
+		else{
+			temp[k]=a[i];
+			j++;
+			k++;
+		}
+	}
+	while(i<=mid){
+		temp[k]=a[i];
+		i++;
+		k++;
+	}
+	while(j<=high){
+		temp[k]=a[j];
+		j++;
+		k++;
+	}
+	for(k=low;k<=high;k++){
+		a[k]=temp[k];
+	}
+}
+}
